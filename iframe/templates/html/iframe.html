@@ -1,0 +1,6 @@
+<div class="iframe_block">
+{% if is_in_studio %}
+<p>Iframe URL with anonymous ID: <a href="{{iframe_url}}">{{iframe_url}}</a></p>
+{% endif %}
+<iframe class="iframe" width="100%" height="1000px" frameborder="0" src="{{iframe_url}}"></iframe>
+</div>

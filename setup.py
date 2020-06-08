@@ -28,7 +28,7 @@ setup(
         'iframe',
     ],
     install_requires=[
-        'XBlock',
+        'XBlock==1.2.9',
     ],
     entry_points={
         'xblock.v1': [

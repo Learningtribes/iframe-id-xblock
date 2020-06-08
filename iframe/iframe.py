@@ -53,7 +53,7 @@ class IframeWithAnonymousIDXBlock(XBlock):
         student_id = self.xmodule_runtime.anonymous_student_id
         # student_id will be "student" if called from the Studio
 
-        new_iframe_url = "{0}/{1}".format(self.iframe_url, student_id)
+        new_iframe_url = "{0}/{1}".format(self.iframe_url)
 
         self.display_name = new_iframe_url
 

@@ -5,6 +5,7 @@ import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Scope, Integer, String, Boolean
 from xblock.fragment import Fragment
+from xblock.exceptions import JsonHandlerError
 
 from django.utils.translation import ugettext as _
 from django.template import Context, Template
@@ -69,6 +70,33 @@ class IframeWithAnonymousIDXBlock(XBlock):
         frag.add_javascript(self.resource_string("static/js/src/iframe.js"))
         frag.initialize_js('IframeWithAnonymousIDXBlock')
         return frag
+
+    @XBlock.json_handler
+    def publish_completion(self, data, dispatch):  # pylint: disable=unused-argument
+        """
+        Entry point for completion for student_view.
+
+        Parameters:
+            data: JSON dict:
+                key: "completion"
+                value: float in range [0.0, 1.0]
+
+            dispatch: Ignored.
+        Return value: JSON response (200 on success, 400 for malformed data)
+        """
+        completion_service = self.runtime.service(self, 'completion')
+        if completion_service is None:
+            raise JsonHandlerError(500, u"No completion service found")
+        elif not completion_service.completion_tracking_enabled():
+            raise JsonHandlerError(404, u"Completion tracking is not enabled and API calls are unexpected")
+        if not isinstance(data['completion'], (int, float)):
+            message = u"Invalid completion value {}. Must be a float in range [0.0, 1.0]"
+            raise JsonHandlerError(400, message.format(data['completion']))
+        elif not 0.0 <= data['completion'] <= 1.0:
+            message = u"Invalid completion value {}. Must be in range [0.0, 1.0]"
+            raise JsonHandlerError(400, message.format(data['completion']))
+        self.runtime.publish(self, "completion", data)
+        return {"result": "ok"}
 
     def studio_view(self, context=None):
         """

@@ -29,7 +29,7 @@ class IframeWithAnonymousIDXBlock(XBlock):
     display_name = String(
         help=_("The name of the component seen by the learners."),
         display_name=_("Component Display Name"),
-        default=_("Iframe tool"),  # name that appears in advanced settings studio menu
+        default=_("iFrame"),  # name that appears in advanced settings studio menu
         scope=Scope.user_state
     )
 

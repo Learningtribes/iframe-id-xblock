@@ -29,12 +29,12 @@ class IframeWithAnonymousIDXBlock(XBlock):
     display_name = String(
         help=_("The name of the component seen by the learners."),
         display_name=_("Component Display Name"),
-        default=_("Iframe tool"),  # name that appears in advanced settings studio menu
+        default=_("iFrame"),  # name that appears in advanced settings studio menu
         scope=Scope.user_state
     )
 
     iframe_url = String(
-        display_name=_("Iframe URL"),
+        display_name=_("iFrame URL"),
         help=_("Don't forget the leading protocol (http:// or https://) and the path, https://yoururl.com/path is correct, for example."),
 		default="",
         scope=Scope.settings
@@ -61,7 +61,7 @@ class IframeWithAnonymousIDXBlock(XBlock):
         context = {
             'self': self,
             'iframe_url': new_iframe_url,
-            'is_in_studio': student_id == ''
+            'is_in_studio': student_id == 'student'
         }
 
         frag = Fragment()

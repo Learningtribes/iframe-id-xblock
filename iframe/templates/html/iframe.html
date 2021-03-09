@@ -1,6 +1,11 @@
+{% load i18n %}
+
 <div class="iframe_block">
-{% if is_in_studio %}
-<p>Iframe URL: <a href="{{iframe_url}}">{{iframe_url}}</a></p>
-{% endif %}
-<iframe class="iframe" frameborder="0" src="{{iframe_url}}"></iframe>
+    {% if iframe_url %}
+        <iframe class="iframe" frameborder="0" src="{{iframe_url}}"></iframe>
+    {% elif is_in_studio %}
+        <p class="iframe-default-text component-default-text">
+            {% trans "Use the IFrame tool to embed an exercise or tool from any web site into your course content."%}
+        </p>
+    {% endif %}
 </div>

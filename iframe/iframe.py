@@ -67,7 +67,7 @@ class IframeWithAnonymousIDXBlock(XBlock):
         frag = Fragment()
         frag.add_content(render_template('/templates/html/iframe.html', context))
         frag.add_css(self.resource_string("static/css/iframe.css"))
-        frag.add_javascript(self.resource_string("static/js/src/iframe.js"))
+        # frag.add_javascript(self.resource_string("static/js/src/iframe.js"))
         frag.initialize_js('IframeWithAnonymousIDXBlock')
         return frag
 

@@ -7,7 +7,7 @@ from xblock.fields import Scope, Integer, String, Boolean
 from xblock.fragment import Fragment
 from xblock.exceptions import JsonHandlerError
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.template import Context, Template
 
 from .utils import render_template, xblock_field_list
